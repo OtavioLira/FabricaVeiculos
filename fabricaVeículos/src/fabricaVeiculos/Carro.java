@@ -2,6 +2,7 @@ package fabricaVeiculos;
 
 public class Carro extends Veiculo{
 
+	
 
 	public Carro(String modelo, String cor, String tipo) {
 		super(modelo, cor, tipo);
@@ -30,6 +31,16 @@ public class Carro extends Veiculo{
 	}
 	public void setQtd_rodas() {
 		this.setQtd_rodas(4);
+	}
+	
+	public void abastecer (Combustivel combustivel, double quantidadeLitros) {
+		if(this.getTanque() + quantidadeLitros <= 50) {
+			this.setTanque(this.getTanque() + quantidadeLitros);
+			this.setRendimento(this.getRendimento() + combustivel.abastecimento(quantidadeLitros));
+		} else {
+			this.setTanque(50);
+			this.setRendimento(this.getRendimento() + combustivel.abastecimento(50));
+		}
 	}
 
 }

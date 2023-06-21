@@ -3,29 +3,34 @@ package fabricaVeiculos;
 import javax.swing.JOptionPane;
 
 public abstract class Veiculo {
-	//Atributos
+	// Atributos
 	private String marca, modelo, tipo, cor, fabrica, carroceria, tipo_motor, transmissao;
 	private int velocidade = 0, qtd_rodas;
+	private double tanque, rodagem, rendimento;
 	private boolean estado = false;
-	//Completar auto: fabrica, quantidade de rodas, tipo_motor, transmissao
-	//nome, marca, tipo, cor, modelo, tipo de roda, motor, fabrica, tipo de carroceria, tipo de motorizaçao
-	//tipo de transmissão
-	//quantidade de rodas, velocidade,
-	
-	//Contrutor
-	public Veiculo (String modelo, String cor, String tipo) {
+	// Completar auto: fabrica, quantidade de rodas, tipo_motor, transmissao
+	// nome, marca, tipo, cor, modelo, tipo de roda, motor, fabrica, tipo de
+	// carroceria, tipo de motorizaçao
+	// tipo de transmissão
+	// quantidade de rodas, velocidade,
+
+	// Contrutor
+	public Veiculo(String modelo, String cor, String tipo) {
 		this.modelo = modelo;
 		this.cor = cor;
 		this.tipo = tipo;
 	}
-	//Getter and Setters
+
+	// Getter and Setters
 	public String getMarca() {
 		return marca;
-	}//SetMarca difinindo um valor
+	}// SetMarca difinindo um valor
+
 	public void setMarca(String marca) {
-		//this. serve para mudar o valor do atributo
+		// this. serve para mudar o valor do atributo
 		this.marca = marca;
 	}
+
 	public String getModelo() {
 		return modelo;
 	}
@@ -105,37 +110,64 @@ public abstract class Veiculo {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+
+	public double getTanque() {
+		return tanque;
+	}
+
+	public void setTanque(double tanque) {
+		this.tanque = tanque;
+	}
+
+	public double getRodagem() {
+		return rodagem;
+	}
+
+	public void setRodagem(double rodagem) {
+		this.rodagem = rodagem;
+	}
 	
-	//Procedimentos
-		public void ligar() { // Procedimento
-			this.estado = true;
+	public double getRendimento() {
+		return rendimento;
+	}
+
+	public void setRendimento(double rendimento) {
+		this.rendimento = rendimento;
+	}
+
+	// Procedimentos
+	public void ligar() { // Procedimento
+		this.estado = true;
+	}
+
+	public void desligar() { // Procedimento
+		this.estado = false;
+		if (this.velocidade > 0) {
+			JOptionPane.showMessageDialog(null, "Você Desligou o veiculo em movimento!, deu ruim!!!!!", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
 		}
-		public void desligar() { // Procedimento
-			this.estado = false;
-			if(this.velocidade > 0) {
-				JOptionPane.showMessageDialog(null, "Você Desligou o veiculo em movimento!, deu ruim!!!!!","Aviso",JOptionPane.WARNING_MESSAGE);
-			}
+	}
+
+	public int acelerar(int velocidade) { // função
+		if (this.estado) {
+			this.velocidade += velocidade;
+		} else {
+			JOptionPane.showMessageDialog(null, "Não foi possivel acelerar, veiculo desligado");
 		}
-		public int acelerar(int velocidade) { // função
-			if(this.estado) {
-				this.velocidade += velocidade;		
+		return this.velocidade;
+	}
+
+	public int freiar(int velocidade) { // função
+		if (this.estado) {
+			if (this.velocidade > 0) {
+				this.velocidade -= velocidade;
 			} else {
 				JOptionPane.showMessageDialog(null, "Não foi possivel acelerar, veiculo desligado");
 			}
-			return this.velocidade;
 		}
-		public int freiar(int velocidade) { // função
-			if(this.estado) {
-				if(this.velocidade > 0) {
-					this.velocidade -= velocidade;							
-				} else {
-					JOptionPane.showMessageDialog(null, "Não foi possivel acelerar, veiculo desligado");
-				}
-			}
-			return this.velocidade;
-		}
-		
-		
+		return this.velocidade;
+	}
 	
 	
+
 }
